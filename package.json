@@ -9,5 +9,11 @@
   "keywords": [],
   "author": "Vanik <egoyanvanik@gmail.com> (https://github.com/EgoVanik)",
   "license": "ISC",
-  "type": "commonjs"
+  "type": "commonjs",
+  "dependencies": {
+    "express": "^5.2.1"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.11"
+  }
 }
