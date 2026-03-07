@@ -1,0 +1,10 @@
+.layout {
+  min-height: 100vh;
+  display: grid;
+  grid-template-rows: min-content auto min-content;
+  background-color: transparent;
+}
+
+.nav-wrapper {
+  padding: 0 2rem;
+}
