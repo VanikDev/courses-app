@@ -11,12 +11,12 @@ class Course {
   }
 
   toJSON() {
-    return JSON.stringify({
+    return {
       title: this.title,
       price: this.price,
       img: this.img,
       id: this.id,
-    })
+    }
   }
 
   async save() {
@@ -44,6 +44,11 @@ class Course {
         }
       })
     })
+  }
+
+  static async getById(id) {
+    const courses = await Course.getAll()
+    return courses.find((course) => course.id === id)
   }
 }
 

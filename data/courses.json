@@ -1,1 +1,20 @@
-["{\"title\":\"Angular 12\",\"price\":\"12000\",\"img\":\"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQp1ZDfkW9yaV5R8Ej89Pvgdmvl-ZIkioyBEA&s\",\"id\":\"6d55ded9-f93a-4fb5-8bef-469208fef467\"}"]
+[
+  {
+    "title": "Angular 18",
+    "price": "12000",
+    "img": "https://images.seeklogo.com/logo-png/33/2/angular-logo-png_seeklogo-331629.png",
+    "id": "435508ca-371d-4b48-9b3d-9fbf9a115783"
+  },
+  {
+    "title": "Vue.js",
+    "price": "8000",
+    "img": "https://www.svgrepo.com/show/452130/vue.svg",
+    "id": "a3ad5b70-3f45-4e10-b32a-6233586b8cd7"
+  },
+  {
+    "title": "React.js",
+    "price": "10000",
+    "img": "https://images.seeklogo.com/logo-png/27/2/react-logo-png_seeklogo-273845.png",
+    "id": "9503f83d-9dfd-4966-b3eb-9c5ce728eb9e"
+  }
+]
