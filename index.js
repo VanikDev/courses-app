@@ -1,5 +1,8 @@
+// TODO: switch to type "module", replace require with imports
+// TODO: add route path constants
+
 const express = require('express')
-// const path = require('path')
+const path = require('path')
 const favicon = require('serve-favicon')
 const exphbs = require('express-handlebars')
 const homeRoutes = require('./routes/home')
@@ -19,7 +22,7 @@ app.engine('hbs', hbs.engine)
 app.set('view engine', 'hbs')
 app.set('views', 'views')
 
-app.use(express.static('public')) // add middleware (регистрация папки public)
+app.use(express.static(path.join(__dirname, 'public'))) // add middleware (регистрация папки public)
 app.use(express.urlencoded({ extended: true })) // form processing
 
 /** Routes | (args: prefix, routes) */
