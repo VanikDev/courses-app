@@ -1,5 +1,6 @@
 const express = require('express')
 // const path = require('path')
+const favicon = require('serve-favicon')
 const exphbs = require('express-handlebars')
 const homeRoutes = require('./routes/home')
 const coursesRoutes = require('./routes/courses')
@@ -22,6 +23,8 @@ app.use(express.urlencoded({ extended: true })) // form processing
 app.use('/', homeRoutes) // add home routes | (args: prefix, routes)
 app.use('/courses', coursesRoutes) // add courses routes | (args: prefix, routes)
 app.use('/add', coursesAdd) // add courses add routes | (args: prefix, routes)
+
+app.use(favicon(__dirname + '/public/favicon.ico')) // favicon
 
 // routes before pages routes
 // app.get('/', (req, res) => {
