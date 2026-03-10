@@ -1,0 +1,21 @@
+<h1>Edit {{course.title}} course</h1>
+
+<form action='/courses/edit' method='POST'>
+  <div class='input-field'>
+    <input id='title' name='title' type='text' class='validate' value='{{course.title}}' required />
+    <label for='title'>Course name</label>
+    <span class='helper-text' data-error='Edit name' data-success='Success'>Edit course name</span>
+  </div>
+  <div class='input-field'>
+    <input id='price' name='price' type='number' class='validate' required min='1' value='{{course.price}}' />
+    <label for='price'>Course price</label>
+    <span class='helper-text' data-error='Edit price' data-success='Success'>Edit course price</span>
+  </div>
+  <div class='input-field'>
+    <input id='img' name='img' type='text' class='validate' value='{{course.img}}' required />
+    <label for='img'>Image URL</label>
+    <span class='helper-text' data-error='Edit image URL' data-success='Success'>Edit image URL</span>
+  </div>
+  <input type='hidden' name='id' value='{{course.id}}' />
+  <button class='waves-effect waves-light btn'>Edit Course</button>
+</form>
