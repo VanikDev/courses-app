@@ -1,10 +1,12 @@
 // TODO: switch to type "module", replace require with imports
+// TODO: TypeScript
 // TODO: add route path constants
 
 const express = require('express')
 const path = require('path')
-const favicon = require('serve-favicon')
+const mongoose = require('mongoose')
 const exphbs = require('express-handlebars')
+const favicon = require('serve-favicon')
 const homeRoutes = require('./routes/home')
 const coursesRoutes = require('./routes/courses')
 const coursesAdd = require('./routes/add')
@@ -76,10 +78,25 @@ const PORT = process.env.PORT || 3000
   })
 */
 
+/** MongoDB connect */
+async function start() {
+  try {
+    const url =
+      'mongodb://vanik_db_user:30alSg5oFMbBeCV0@ac-6fafcdo-shard-00-00.q3juvi3.mongodb.net:27017,ac-6fafcdo-shard-00-01.q3juvi3.mongodb.net:27017,ac-6fafcdo-shard-00-02.q3juvi3.mongodb.net:27017/shop?ssl=true&replicaSet=atlas-lpg9j6-shard-0&authSource=admin&appName=Cluster0'
+    await mongoose.connect(url)
+    app.listen(PORT, () => {
+      console.log(`Server is running on port ${PORT}`)
+    })
+  } catch (e) {
+    console.log(e)
+  }
+}
+start()
+
 /** Listen port */
-app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`)
-})
+// app.listen(PORT, () => {
+//   console.log(`Server is running on port ${PORT}`)
+// })
 
 /** Движки для генерации HTML-файлов
  * PUG: https://pugjs.org/api/getting-started.html
