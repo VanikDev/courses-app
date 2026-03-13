@@ -17,6 +17,10 @@ const app = express()
 const hbs = exphbs.create({
   defaultLayout: 'main',
   extname: 'hbs',
+  runtimeOptions: {
+    allowProtoPropertiesByDefault: true,
+    allowProtoMethodsByDefault: true,
+  },
 })
 
 /** In Express registered HBS as an engine for rendering HTML pages */
