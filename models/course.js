@@ -1,66 +1,29 @@
-const { v4: uuidv4 } = require('uuid')
-const fs = require('fs')
-const path = require('path')
+// model Course for working with MongoDB
+const { Schema, model } = require('mongoose')
 
-class Course {
-  constructor(title, price, img) {
-    this.title = title
-    this.price = price
-    this.img = img
-    this.id = uuidv4()
-  }
+const courseSchema = new Schema({
+  title: {
+    type: String,
+    required: true,
+  },
+  price: {
+    type: Number,
+    required: true,
+  },
+  img: String,
+  userId: {
+    type: Schema.Types.ObjectId,
+    ref: 'User', // связка в бд
+  },
+})
 
-  toJSON() {
-    return {
-      title: this.title,
-      price: this.price,
-      img: this.img,
-      id: this.id,
-    }
-  }
+courseSchema.method('toClient', function () {
+  const course = this.toObject()
 
-  async save() {
-    const courses = await Course.getAll()
-    courses.push(this.toJSON())
-    console.log(courses)
-    return Course.writeToFile(courses)
-  }
+  course.id = course._id
+  delete course._id
 
-  static async update(course) {
-    const courses = await Course.getAll()
-    const idx = courses.findIndex((c) => c.id === course.id)
-    courses[idx] = course
-    return Course.writeToFile(courses)
-  }
+  return course
+})
 
-  static getAll() {
-    return new Promise((resolve, reject) => {
-      fs.readFile(path.join(__dirname, '..', 'data', 'courses.json'), 'utf-8', (err, content) => {
-        if (err) {
-          reject(err)
-        } else {
-          resolve(JSON.parse(content))
-        }
-      })
-    })
-  }
-
-  static async getById(id) {
-    const courses = await Course.getAll()
-    return courses.find((course) => course.id === id)
-  }
-
-  static async writeToFile(courses) {
-    return new Promise((resolve, reject) => {
-      fs.writeFile(path.join(__dirname, '..', 'data', 'courses.json'), JSON.stringify(courses), (err) => {
-        if (err) {
-          reject(err)
-        } else {
-          resolve()
-        }
-      })
-    })
-  }
-}
-
-module.exports = Course
+module.exports = model('Course', courseSchema) // args(name, schema)
