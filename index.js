@@ -1,26 +1,50 @@
 // TODO: switch to type "module", replace require with imports
+// TODO: TypeScript
 // TODO: add route path constants
 
 const express = require('express')
 const path = require('path')
-const favicon = require('serve-favicon')
+const mongoose = require('mongoose')
 const exphbs = require('express-handlebars')
+const favicon = require('serve-favicon')
 const homeRoutes = require('./routes/home')
 const coursesRoutes = require('./routes/courses')
 const coursesAdd = require('./routes/add')
-const cardRoutes = require('./routes/card')
+const cartRoutes = require('./routes/cart')
+const ordersRoutes = require('./routes/orders')
+const User = require('./models/user')
 
 /** Initial Express and HBS */
 const app = express()
 const hbs = exphbs.create({
   defaultLayout: 'main',
   extname: 'hbs',
+  runtimeOptions: {
+    allowProtoPropertiesByDefault: true,
+    allowProtoMethodsByDefault: true,
+  },
+  helpers: {
+    increment: function (index) {
+      return index + 1
+    },
+  },
 })
 
 /** In Express registered HBS as an engine for rendering HTML pages */
 app.engine('hbs', hbs.engine)
 app.set('view engine', 'hbs')
 app.set('views', 'views')
+
+/** User middleware */
+app.use(async (req, res, next) => {
+  try {
+    const user = await User.findById('69b8f85979004e56ca7bc79f')
+    req.user = user
+    next()
+  } catch (e) {
+    console.log(e)
+  }
+})
 
 app.use(express.static(path.join(__dirname, 'public'))) // add middleware (регистрация папки public)
 app.use(express.urlencoded({ extended: true })) // form processing
@@ -29,7 +53,8 @@ app.use(express.urlencoded({ extended: true })) // form processing
 app.use('/', homeRoutes) // home routes
 app.use('/courses', coursesRoutes) // courses routes
 app.use('/add', coursesAdd) // courses add routes
-app.use('/card', cardRoutes) // card routes
+app.use('/cart', cartRoutes) // cart routes
+app.use('/orders', ordersRoutes) // orders routes
 
 /** Favicon */
 app.use(favicon(__dirname + '/public/favicon.ico')) // favicon
@@ -76,10 +101,36 @@ const PORT = process.env.PORT || 3000
   })
 */
 
+/** MongoDB connect */
+async function start() {
+  try {
+    const url =
+      'mongodb://vanik_db_user:30alSg5oFMbBeCV0@ac-6fafcdo-shard-00-00.q3juvi3.mongodb.net:27017,ac-6fafcdo-shard-00-01.q3juvi3.mongodb.net:27017,ac-6fafcdo-shard-00-02.q3juvi3.mongodb.net:27017/shop?ssl=true&replicaSet=atlas-lpg9j6-shard-0&authSource=admin&appName=Cluster0'
+    await mongoose.connect(url)
+    // is user?
+    const candidate = await User.findOne()
+    if (!candidate) {
+      const user = new User({
+        email: 'egoyanvanik@gmail.com',
+        name: 'Vanik',
+        cart: { items: [] },
+      })
+      await user.save()
+    }
+
+    app.listen(PORT, () => {
+      console.log(`Server is running on port ${PORT}`)
+    })
+  } catch (e) {
+    console.log(e)
+  }
+}
+start()
+
 /** Listen port */
-app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`)
-})
+// app.listen(PORT, () => {
+//   console.log(`Server is running on port ${PORT}`)
+// })
 
 /** Движки для генерации HTML-файлов
  * PUG: https://pugjs.org/api/getting-started.html
