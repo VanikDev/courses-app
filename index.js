@@ -11,6 +11,7 @@ const homeRoutes = require('./routes/home')
 const coursesRoutes = require('./routes/courses')
 const coursesAdd = require('./routes/add')
 const cartRoutes = require('./routes/cart')
+const ordersRoutes = require('./routes/orders')
 const User = require('./models/user')
 
 /** Initial Express and HBS */
@@ -21,6 +22,11 @@ const hbs = exphbs.create({
   runtimeOptions: {
     allowProtoPropertiesByDefault: true,
     allowProtoMethodsByDefault: true,
+  },
+  helpers: {
+    increment: function (index) {
+      return index + 1
+    },
   },
 })
 
@@ -48,6 +54,7 @@ app.use('/', homeRoutes) // home routes
 app.use('/courses', coursesRoutes) // courses routes
 app.use('/add', coursesAdd) // courses add routes
 app.use('/cart', cartRoutes) // cart routes
+app.use('/orders', ordersRoutes) // orders routes
 
 /** Favicon */
 app.use(favicon(__dirname + '/public/favicon.ico')) // favicon
