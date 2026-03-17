@@ -18,7 +18,7 @@ if ($card) {
     if (target.classList.contains('js-remove')) {
       const { id } = target.dataset
       console.log({ id })
-      fetch(`/card/remove/${id}`, {
+      fetch(`/cart/remove/${id}`, {
         method: 'DELETE',
       })
         .then((res) => res.json())

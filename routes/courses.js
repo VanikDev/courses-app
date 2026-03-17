@@ -3,7 +3,8 @@ const Course = require('../models/course')
 const router = Router()
 
 router.get('/', async (req, res) => {
-  const courses = await Course.find()
+  // без populate userId: string, с populate userId: Object со всеми данными, если еще указать поля - выполнится select: select('email name')
+  const courses = await Course.find().populate('userId', 'email name')
   res.render('courses', {
     title: 'Courses',
     isCourses: true,
