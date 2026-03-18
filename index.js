@@ -16,6 +16,7 @@ const cartRoutes = require('./routes/cart')
 const ordersRoutes = require('./routes/orders')
 const authRoutes = require('./routes/auth')
 const variablesMiddleware = require('./middleware/variables')
+const userMiddleware = require('./middleware/user')
 
 const MONGODB_URI =
   'mongodb://vanik_db_user:30alSg5oFMbBeCV0@ac-6fafcdo-shard-00-00.q3juvi3.mongodb.net:27017,ac-6fafcdo-shard-00-01.q3juvi3.mongodb.net:27017,ac-6fafcdo-shard-00-02.q3juvi3.mongodb.net:27017/shop?ssl=true&replicaSet=atlas-lpg9j6-shard-0&authSource=admin&appName=Cluster0'
@@ -69,6 +70,7 @@ app.use(
   })
 ) // session middleware
 app.use(variablesMiddleware) // initialization variable middleware
+app.use(userMiddleware) // initialization user middleware
 
 /** Routes | (args: prefix, routes) */
 app.use('/', homeRoutes) // home routes
