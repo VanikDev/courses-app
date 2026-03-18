@@ -12,6 +12,7 @@ const coursesRoutes = require('./routes/courses')
 const coursesAdd = require('./routes/add')
 const cartRoutes = require('./routes/cart')
 const ordersRoutes = require('./routes/orders')
+const authRoutes = require('./routes/auth')
 const User = require('./models/user')
 
 /** Initial Express and HBS */
@@ -27,6 +28,7 @@ const hbs = exphbs.create({
     increment: function (index) {
       return index + 1
     },
+    gt: (a, b) => a > b,
   },
 })
 
@@ -55,6 +57,7 @@ app.use('/courses', coursesRoutes) // courses routes
 app.use('/add', coursesAdd) // courses add routes
 app.use('/cart', cartRoutes) // cart routes
 app.use('/orders', ordersRoutes) // orders routes
+app.use('/auth', authRoutes) // auth routes
 
 /** Favicon */
 app.use(favicon(__dirname + '/public/favicon.ico')) // favicon

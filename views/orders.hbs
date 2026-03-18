@@ -7,8 +7,12 @@
         <div class='card'>
           <div class='card-content'>
             <span class='card-title'>
-              Order
-              {{increment @index}}:
+              {{#if (gt ../orders.length 1)}}
+                Order
+                {{increment @index}}:
+              {{else}}
+                Order:
+              {{/if}}
               <small>{{_id}}</small>
             </span>
             <p class='date'>{{date}}</p>

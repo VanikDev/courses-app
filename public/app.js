@@ -6,6 +6,7 @@ const toCurrency = (price) => {
   }).format(price)
 }
 
+/** Date formatting */
 const toDate = (date) => {
   return new Intl.DateTimeFormat('ru-RU', {
     day: '2-digit',
@@ -62,3 +63,6 @@ if ($cart) {
     }
   })
 }
+
+/** Tabs Initialization */
+M.Tabs.init(document.querySelectorAll('.tabs'))
