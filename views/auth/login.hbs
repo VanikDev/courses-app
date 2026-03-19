@@ -1,0 +1,62 @@
+<div class='auth'>
+  <div class='row'>
+    <div class='col s12'>
+      <ul class='tabs'>
+        <li class='tab col s6'><a href='#login' class='active'>Login</a></li>
+        <li class='tab col s6'><a href='#register'>Register</a></li>
+      </ul>
+    </div>
+
+    <div id='login' class='col s6 offset-s3'>
+      {{#if loginError}}
+        <p class='alert'>{{loginError}}</p>
+      {{/if}}
+      <h1>Enter the store</h1>
+      <form action='/auth/login' method='POST'>
+        <div class='input-field'>
+          <input id='email' name='email' type='text' class='validate' required />
+          <label for='email'>Email</label>
+          <span class='helper-text' data-error='Enter email' data-success='Success'>Enter email</span>
+        </div>
+        <div class='input-field'>
+          <input id='password' name='password' type='password' class='validate' required />
+          <label for='password'>Enter password</label>
+          <span class='helper-text' data-error='Enter password' data-success='Success'>Enter password</span>
+        </div>
+        <input type='hidden' name='_csrf' value='{{csrf}}' />
+        <button type='submit' class='waves-effect waves-light btn'>Login</button>
+      </form>
+    </div>
+
+    <div id='register' class='col s6 offset-s3'>
+      {{#if registerError}}
+        <p class='alert'>{{registerError}}</p>
+      {{/if}}
+      <h1>Register the store</h1>
+      <form action='/auth/register' method='POST'>
+        <div class='input-field'>
+          <input id='name' name='name' type='text' class='validate' required />
+          <label for='name'>Enter your name</label>
+          <span class='helper-text' data-error='Enter name' data-success='Success'>Enter your name</span>
+        </div>
+        <div class='input-field'>
+          <input id='remail' name='email' type='text' class='validate' required />
+          <label for='remail'>Email</label>
+          <span class='helper-text' data-error='Enter email' data-success='Success'>Enter email</span>
+        </div>
+        <div class='input-field'>
+          <input id='rpassword' name='password' type='password' class='validate' required />
+          <label for='rpassword'>Enter password</label>
+          <span class='helper-text' data-error='Enter password' data-success='Success'>Enter password</span>
+        </div>
+        <div class='input-field'>
+          <input id='confirm' name='confirm' type='password' class='validate' required />
+          <label for='confirm'>Enter your password again</label>
+          <span class='helper-text' data-error='Enter password' data-success='Success'>Enter your password again</span>
+        </div>
+        <input type='hidden' name='_csrf' value='{{csrf}}' />
+        <button type='submit' class='waves-effect waves-light btn'>Register</button>
+      </form>
+    </div>
+  </div>
+</div>

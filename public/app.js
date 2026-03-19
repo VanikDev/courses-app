@@ -6,6 +6,7 @@ const toCurrency = (price) => {
   }).format(price)
 }
 
+/** Date formatting */
 const toDate = (date) => {
   return new Intl.DateTimeFormat('ru-RU', {
     day: '2-digit',
@@ -31,10 +32,14 @@ if ($cart) {
   $cart.addEventListener('click', (event) => {
     const { target } = event
     if (target.classList.contains('js-remove')) {
-      const { id } = target.dataset
+      const { id, csrf } = target.dataset
       console.log({ id })
+
       fetch(`/cart/remove/${id}`, {
         method: 'DELETE',
+        headers: {
+          'X-XSRF-TOKEN': csrf,
+        },
       })
         .then((res) => res.json())
         .then((cart) => {
@@ -62,3 +67,6 @@ if ($cart) {
     }
   })
 }
+
+/** Tabs Initialization */
+M.Tabs.init(document.querySelectorAll('.tabs'))
