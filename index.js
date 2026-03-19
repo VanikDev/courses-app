@@ -6,9 +6,12 @@ const express = require('express')
 const path = require('path')
 const mongoose = require('mongoose')
 const exphbs = require('express-handlebars')
+const csrf = require('csurf')
+const flash = require('connect-flash')
 const session = require('express-session')
 const MongoStore = require('connect-mongodb-session')(session)
 const favicon = require('serve-favicon')
+
 const homeRoutes = require('./routes/home')
 const coursesRoutes = require('./routes/courses')
 const coursesAdd = require('./routes/add')
@@ -69,6 +72,8 @@ app.use(
     store,
   })
 ) // session middleware
+app.use(csrf()) // CSRF-protection
+app.use(flash()) // connect-flash
 app.use(variablesMiddleware) // initialization variable middleware
 app.use(userMiddleware) // initialization user middleware
 
