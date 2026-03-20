@@ -1,4 +1,5 @@
 // TODO: switch to type "module", replace require with imports
+// TODO: try catch
 // TODO: TypeScript
 // TODO: add route path constants
 
@@ -21,6 +22,7 @@ const authRoutes = require('./routes/auth')
 const variablesMiddleware = require('./middleware/variables')
 const userMiddleware = require('./middleware/user')
 const keys = require('./keys')
+const hbsHelpers = require('./utils/hbs-helpers')
 
 /** Initial Express and HBS */
 const app = express()
@@ -31,12 +33,7 @@ const hbs = exphbs.create({
     allowProtoPropertiesByDefault: true,
     allowProtoMethodsByDefault: true,
   },
-  helpers: {
-    increment: function (index) {
-      return index + 1
-    },
-    gt: (a, b) => a > b,
-  },
+  helpers: hbsHelpers,
 })
 
 const store = new MongoStore({
