@@ -20,7 +20,9 @@
     "express": "^5.2.1",
     "express-handlebars": "^8.0.4",
     "express-session": "^1.19.0",
+    "mailtrap": "^4.5.1",
     "mongoose": "^8.23.0",
+    "nodemailer": "^7.0.13",
     "serve-favicon": "^2.5.1",
     "uuid": "^13.0.0"
   },

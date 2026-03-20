@@ -1,7 +1,19 @@
 const { Router } = require('express')
-const User = require('../models/user')
+const Nodemailer = require('nodemailer')
+const { MailtrapTransport } = require('mailtrap')
 const bcrypt = require('bcryptjs')
 const router = Router()
+const User = require('../models/user')
+const keys = require('../keys')
+const regEmail = require('../emails/registration')
+
+const transport = Nodemailer.createTransport(
+  MailtrapTransport({
+    token: keys.MAILTRAP_TOKEN,
+    sandbox: true,
+    testInboxId: 4476250,
+  })
+)
 
 router.get('/login', async (req, res) => {
   res.render('auth/login', {
@@ -73,6 +85,7 @@ router.post('/register', async (req, res) => {
       })
       await user.save()
       res.redirect('/auth/login')
+      await transport.sendMail(regEmail(email)).then(console.log, console.error)
     }
   } catch (e) {
     console.log(e)
