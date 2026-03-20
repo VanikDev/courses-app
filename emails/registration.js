@@ -1,14 +1,8 @@
 const keys = require('../keys')
 
 module.exports = function (email) {
-  const sender = {
-    address: keys.EMAIL_FROM,
-    name: 'Mailtrap Test',
-  }
-  const recipients = ['jasonfoxx77@gmail.com']
-
   return {
-    from: sender,
+    from: keys.SENDER,
     to: email,
     subject: 'Account created successfully!',
     category: 'Integration Test',
