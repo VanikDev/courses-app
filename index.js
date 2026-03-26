@@ -19,6 +19,8 @@ const coursesAdd = require('./routes/add')
 const cartRoutes = require('./routes/cart')
 const ordersRoutes = require('./routes/orders')
 const authRoutes = require('./routes/auth')
+const profileRoutes = require('./routes/profile')
+
 const variablesMiddleware = require('./middleware/variables')
 const userMiddleware = require('./middleware/user')
 const errorHandler = require('./middleware/error')
@@ -80,6 +82,7 @@ app.use('/add', coursesAdd) // courses add routes
 app.use('/cart', cartRoutes) // cart routes
 app.use('/orders', ordersRoutes) // orders routes
 app.use('/auth', authRoutes) // auth routes
+app.use('/profile', profileRoutes) // profile routes
 
 /** Favicon */
 app.use(favicon(__dirname + '/public/favicon.ico')) // favicon
