@@ -21,6 +21,7 @@ const ordersRoutes = require('./routes/orders')
 const authRoutes = require('./routes/auth')
 const variablesMiddleware = require('./middleware/variables')
 const userMiddleware = require('./middleware/user')
+const errorHandler = require('./middleware/error')
 const keys = require('./keys')
 const hbsHelpers = require('./utils/hbs-helpers')
 
@@ -82,6 +83,9 @@ app.use('/auth', authRoutes) // auth routes
 
 /** Favicon */
 app.use(favicon(__dirname + '/public/favicon.ico')) // favicon
+
+/** 404 */
+app.use(errorHandler)
 
 /** Routes without handlebars
   app.get('/', (req, res) => {

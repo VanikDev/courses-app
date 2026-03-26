@@ -4,7 +4,7 @@ const { MailtrapTransport } = require('mailtrap')
 const bcrypt = require('bcryptjs')
 const crypto = require('crypto')
 const { validationResult } = require('express-validator')
-const { registerValidators } = require('../utils/validators')
+const { registerValidators, loginValidators } = require('../utils/validators')
 const router = Router()
 const User = require('../models/user')
 const keys = require('../keys')
@@ -28,7 +28,7 @@ router.get('/login', async (req, res) => {
   })
 })
 
-router.post('/login', async (req, res) => {
+router.post('/login', loginValidators, async (req, res) => {
   try {
     const { email, password } = req.body
     const candidate = await User.findOne({ email })
