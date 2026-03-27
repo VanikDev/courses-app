@@ -1,6 +1,7 @@
-const { Router } = require('express')
-const Course = require('../models/course')
-const auth = require('../middleware/auth')
+import { Router } from 'express'
+import Course from '../models/course.js'
+import auth from '../middleware/auth.js'
+
 const router = Router()
 
 // функция вытаскивает необходимые данные, чтобы не тянуть все метаданные из CoreMongooseArray
@@ -49,4 +50,4 @@ router.delete('/remove/:id', auth, async (req, res) => {
   res.status(200).json(cart)
 })
 
-module.exports = router
+export default router

@@ -1,5 +1,5 @@
 // model Course for working with MongoDB
-const { Schema, model } = require('mongoose')
+import { Schema, model } from 'mongoose'
 
 const courseSchema = new Schema({
   title: {
@@ -26,4 +26,4 @@ courseSchema.method('toClient', function () {
   return course
 })
 
-module.exports = model('Course', courseSchema) // args(name, schema)
+export default model('Course', courseSchema) // args(name, schema)

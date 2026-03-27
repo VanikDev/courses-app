@@ -11,7 +11,7 @@
   "keywords": [],
   "author": "Vanik <egoyanvanik@gmail.com> (https://github.com/EgoVanik)",
   "license": "ISC",
-  "type": "commonjs",
+  "type": "module",
   "dependencies": {
     "bcryptjs": "^3.0.3",
     "compression": "^1.8.1",
