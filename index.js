@@ -19,8 +19,12 @@ const coursesAdd = require('./routes/add')
 const cartRoutes = require('./routes/cart')
 const ordersRoutes = require('./routes/orders')
 const authRoutes = require('./routes/auth')
+const profileRoutes = require('./routes/profile')
+
 const variablesMiddleware = require('./middleware/variables')
 const userMiddleware = require('./middleware/user')
+const errorHandler = require('./middleware/error')
+const fileMiddleware = require('./middleware/file')
 const keys = require('./keys')
 const hbsHelpers = require('./utils/hbs-helpers')
 
@@ -57,7 +61,8 @@ app.set('views', 'views')
 //   }
 // })
 
-app.use(express.static(path.join(__dirname, 'public'))) // add middleware (регистрация папки public)
+app.use(express.static(path.join(__dirname, 'public'))) // middleware (static public)
+app.use('/images', express.static(path.join(__dirname, 'images'))) // middleware (static images)
 app.use(express.urlencoded({ extended: true })) // form processing
 app.use(
   session({
@@ -67,6 +72,7 @@ app.use(
     store,
   })
 ) // session middleware
+app.use(fileMiddleware.single('avatar')) // file middleware
 app.use(csrf()) // CSRF-protection
 app.use(flash()) // connect-flash
 app.use(variablesMiddleware) // initialization variable middleware
@@ -79,9 +85,13 @@ app.use('/add', coursesAdd) // courses add routes
 app.use('/cart', cartRoutes) // cart routes
 app.use('/orders', ordersRoutes) // orders routes
 app.use('/auth', authRoutes) // auth routes
+app.use('/profile', profileRoutes) // profile routes
 
 /** Favicon */
 app.use(favicon(__dirname + '/public/favicon.ico')) // favicon
+
+/** 404 */
+app.use(errorHandler)
 
 /** Routes without handlebars
   app.get('/', (req, res) => {
