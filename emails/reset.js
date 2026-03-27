@@ -1,13 +1,12 @@
-const keys = require('../keys')
+import keys from '../keys/index.js'
 
-module.exports = function (email, token) {
-  return {
-    from: keys.SENDER,
-    to: email,
-    subject: 'Access restoration',
-    category: 'Reset Password',
-    // text: 'Congrats for sending test email with Mailtrap!',
-    html: `
+const resetEmail = (email, token) => ({
+  from: keys.SENDER,
+  to: email,
+  subject: 'Access restoration',
+  category: 'Reset Password',
+  // text: 'Congrats for sending test email with Mailtrap!',
+  html: `
         <h1>Forgot your password?</h1>
         <p>If not, then ignore this letter.</p>
         <p>Otherwise click on the link below:</p>
@@ -17,5 +16,6 @@ module.exports = function (email, token) {
         <hr />
         <a href="${keys.BASE_URL}">Courses shop</a>
     `,
-  }
-}
+})
+
+export default resetEmail

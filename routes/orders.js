@@ -1,6 +1,7 @@
-const { Router } = require('express')
-const Order = require('../models/order')
-const auth = require('../middleware/auth')
+import { Router } from 'express'
+import Order from '../models/order.js'
+import auth from '../middleware/auth.js'
+
 const router = Router()
 
 router.get('/', auth, async (req, res) => {
@@ -47,4 +48,4 @@ router.post('/', auth, async (req, res) => {
   }
 })
 
-module.exports = router
+export default router

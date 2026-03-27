@@ -1,35 +1,39 @@
-// TODO: switch to type "module", replace require with imports
 // TODO: try catch
 // TODO: TypeScript
 // TODO: add route path constants
 
-const express = require('express')
-const path = require('path')
-const mongoose = require('mongoose')
-const exphbs = require('express-handlebars')
-const csrf = require('csurf')
-const flash = require('connect-flash')
-const session = require('express-session')
-const helmet = require('helmet')
-const compression = require('compression')
-const MongoStore = require('connect-mongodb-session')(session)
-const favicon = require('serve-favicon')
+import express from 'express'
+import path from 'path'
+import { fileURLToPath } from 'url'
+import mongoose from 'mongoose'
+import exphbs from 'express-handlebars'
+import csrf from 'csurf'
+import flash from 'connect-flash'
+import session from 'express-session'
+import helmet from 'helmet'
+import compression from 'compression'
+import connectMongoDbSession from 'connect-mongodb-session'
+import favicon from 'serve-favicon'
 
-const homeRoutes = require('./routes/home')
-const coursesRoutes = require('./routes/courses')
-const coursesAdd = require('./routes/add')
-const cartRoutes = require('./routes/cart')
-const ordersRoutes = require('./routes/orders')
-const authRoutes = require('./routes/auth')
-const profileRoutes = require('./routes/profile')
+import homeRoutes from './routes/home.js'
+import coursesRoutes from './routes/courses.js'
+import coursesAdd from './routes/add.js'
+import cartRoutes from './routes/cart.js'
+import ordersRoutes from './routes/orders.js'
+import authRoutes from './routes/auth.js'
+import profileRoutes from './routes/profile.js'
 
-const variablesMiddleware = require('./middleware/variables')
-const userMiddleware = require('./middleware/user')
-const errorHandler = require('./middleware/error')
-const fileMiddleware = require('./middleware/file')
-const keys = require('./keys')
-const hbsHelpers = require('./utils/hbs-helpers')
+import variablesMiddleware from './middleware/variables.js'
+import userMiddleware from './middleware/user.js'
+import errorHandler from './middleware/error.js'
+import fileMiddleware from './middleware/file.js'
+import keys from './keys/index.js'
+import hbsHelpers from './utils/hbs-helpers.js'
 
+const __filename = fileURLToPath(import.meta.url)
+const __dirname = path.dirname(__filename)
+
+const MongoStore = connectMongoDbSession(session)
 /** Initial Express and HBS */
 const app = express()
 const hbs = exphbs.create({

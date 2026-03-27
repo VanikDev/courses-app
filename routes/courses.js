@@ -1,8 +1,9 @@
-const { Router } = require('express')
-const Course = require('../models/course')
-const { validationResult } = require('express-validator')
-const { courseValidators } = require('../utils/validators')
-const auth = require('../middleware/auth')
+import { Router } from 'express'
+import Course from '../models/course.js'
+import { validationResult } from 'express-validator'
+import { courseValidators } from '../utils/validators.js'
+import auth from '../middleware/auth.js'
+
 const router = Router()
 
 function isOwner(course, req) {
@@ -95,4 +96,4 @@ router.post('/remove', auth, async (req, res) => {
   }
 })
 
-module.exports = router
+export default router

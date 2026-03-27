@@ -1,17 +1,18 @@
-const { Router } = require('express')
-const Nodemailer = require('nodemailer')
-const { MailtrapTransport } = require('mailtrap')
-const bcrypt = require('bcryptjs')
-const crypto = require('crypto')
-const { validationResult } = require('express-validator')
-const { registerValidators, loginValidators } = require('../utils/validators')
-const router = Router()
-const User = require('../models/user')
-const keys = require('../keys')
-const regEmail = require('../emails/registration')
-const resetEmail = require('../emails/reset')
+import { Router } from 'express'
+import nodemailer from 'nodemailer'
+import { MailtrapTransport } from 'mailtrap'
+import bcrypt from 'bcryptjs'
+import crypto from 'crypto'
+import { validationResult } from 'express-validator'
+import { registerValidators, loginValidators } from '../utils/validators.js'
+import User from '../models/user.js'
+import keys from '../keys/index.js'
+import regEmail from '../emails/registration.js'
+import resetEmail from '../emails/reset.js'
 
-const transport = Nodemailer.createTransport(
+const router = Router()
+
+const transport = nodemailer.createTransport(
   MailtrapTransport({
     token: keys.MAILTRAP_TOKEN,
     sandbox: true,
@@ -180,4 +181,4 @@ router.post('/password', async (req, res) => {
   }
 })
 
-module.exports = router
+export default router
