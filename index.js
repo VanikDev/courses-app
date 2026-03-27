@@ -10,6 +10,8 @@ const exphbs = require('express-handlebars')
 const csrf = require('csurf')
 const flash = require('connect-flash')
 const session = require('express-session')
+const helmet = require('helmet')
+const compression = require('compression')
 const MongoStore = require('connect-mongodb-session')(session)
 const favicon = require('serve-favicon')
 
@@ -75,6 +77,18 @@ app.use(
 app.use(fileMiddleware.single('avatar')) // file middleware
 app.use(csrf()) // CSRF-protection
 app.use(flash()) // connect-flash
+app.use(
+  helmet({
+    contentSecurityPolicy: {
+      directives: {
+        ...helmet.contentSecurityPolicy.getDefaultDirectives(),
+        'img-src': ["'self'", 'https:'],
+        'script-src': ["'self'", 'https://cdnjs.cloudflare.com'],
+      },
+    },
+  })
+) // helmet
+app.use(compression()) // compression
 app.use(variablesMiddleware) // initialization variable middleware
 app.use(userMiddleware) // initialization user middleware
 
