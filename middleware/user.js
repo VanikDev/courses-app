@@ -1,6 +1,6 @@
-const User = require('../models/user')
+import User from '../models/user.js'
 
-module.exports = async function (req, res, next) {
+export default async function userMiddleware(req, res, next) {
   if (!req.session.user) {
     return next()
   }

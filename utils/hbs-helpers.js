@@ -1,4 +1,4 @@
-module.exports = {
+export default {
   increment: (index) => index + 1,
   gt: (a, b) => a > b,
   ifeq: (a, b, options) => {
