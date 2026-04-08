@@ -1,9 +1,10 @@
-import { Router } from 'express'
+import { Router, Request, Response } from 'express'
 import User from '../models/user.js'
+import { ProfileBody, ProfileRequest } from '#/types/routes.js'
 
-const router = Router()
+const router: Router = Router()
 
-router.get('/', async (req, res) => {
+router.get('/', async (req: Request, res: Response): Promise<void> => {
   res.render('profile', {
     title: 'Profile',
     isProfile: true,
@@ -11,12 +12,13 @@ router.get('/', async (req, res) => {
   })
 })
 
-router.post('/', async (req, res) => {
+router.post('/', async (req: ProfileRequest, res: Response): Promise<void> => {
   try {
     const user = await User.findById(req.user._id)
 
     const toChange = {
       name: req.body.name,
+      avatarUrl: undefined
     }
 
     if (req.file) {

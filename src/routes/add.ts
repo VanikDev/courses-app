@@ -1,24 +1,34 @@
-import { Router } from 'express'
+import { Router, Request, Response } from 'express'
 import Course from '../models/course.js'
 import { validationResult } from 'express-validator'
 import { courseValidators } from '../utils/validators.js'
 import auth from '../middleware/auth.js'
+import { IUser } from '../types/user.js'
 
-const router = Router()
+interface AddCourseBody {
+  title: string
+  price: string | number
+  img: string
+}
 
-router.get('/', auth, (req, res) => {
+interface RequestWithUser extends Request {
+  user?: IUser | null
+}
+
+const router: Router = Router()
+
+router.get('/', auth, (req: Request, res: Response) => {
   res.render('add', {
     title: 'Add course',
     isAdd: true,
   })
 })
 
-router.post('/', auth, courseValidators, async (req, res) => {
-  const { title, price, img } = req.body
+router.post('/', auth, courseValidators, async (req: RequestWithUser, res: Response): Promise<void> => {
+  const { title, price, img } = req.body as AddCourseBody
   const errors = validationResult(req)
 
   if (!errors.isEmpty()) {
-    // req.flash('courseError', errors.array()[0].msg)
     return res.status(422).render('add', {
       title: 'Add course',
       isAdd: true,
@@ -35,7 +45,7 @@ router.post('/', auth, courseValidators, async (req, res) => {
     title,
     price,
     img,
-    userId: req.user, // такая запись возможна, тк в модели указан ObjectId
+    userId: req.user,
   })
 
   try {

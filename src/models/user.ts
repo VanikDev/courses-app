@@ -1,6 +1,8 @@
 import { Schema, model } from 'mongoose'
+import { ICourseDocument } from '../types/course.js'
+import { IUserDocument } from '../types/user.js'
 
-const userSchema = new Schema({
+const userSchema = new Schema<IUserDocument>({
   name: {
     type: String,
     required: true,
@@ -30,7 +32,7 @@ const userSchema = new Schema({
   avatarUrl: String,
 })
 
-userSchema.methods.addToCart = function (course) {
+userSchema.methods.addToCart = function (this: IUserDocument, course: ICourseDocument) {
   const items = [...this.cart.items]
   const idx = items.findIndex((c) => {
     return c.courseId.toString() === course._id.toString()
@@ -67,4 +69,4 @@ userSchema.methods.clearCart = function () {
   this.cart = { items: [] }
   return this.save()
 }
-export default model('User', userSchema)
+export default model<IUserDocument>('User', userSchema)
