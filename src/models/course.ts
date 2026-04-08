@@ -1,7 +1,8 @@
 // model Course for working with MongoDB
 import { Schema, model } from 'mongoose'
+import { ICourseDocument } from '../types/course.js'
 
-const courseSchema = new Schema({
+const courseSchema = new Schema<ICourseDocument>({
   title: {
     type: String,
     required: true,
@@ -17,7 +18,7 @@ const courseSchema = new Schema({
   },
 })
 
-courseSchema.method('toClient', function () {
+courseSchema.method('toClient', function (this: ICourseDocument) {
   const course = this.toObject()
 
   course.id = course._id
@@ -26,4 +27,4 @@ courseSchema.method('toClient', function () {
   return course
 })
 
-export default model('Course', courseSchema) // args(name, schema)
+export default model<ICourseDocument>('Course', courseSchema) // args(name, schema)

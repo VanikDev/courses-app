@@ -1,7 +1,4 @@
-// TODO: try catch
-// TODO: TypeScript
 // TODO: add route path constants
-
 import express from 'express'
 import path from 'path'
 import { fileURLToPath } from 'url'
@@ -54,29 +51,17 @@ const store = new MongoStore({
 /** In Express registered HBS as an engine for rendering HTML pages */
 app.engine('hbs', hbs.engine)
 app.set('view engine', 'hbs')
-// app.set('views', 'views')
 app.set('views', path.join(process.cwd(), 'src', 'views'))
-
-/** User middleware */
-// app.use(async (req, res, next) => {
-//   try {
-//     const user = await User.findById('69b8f85979004e56ca7bc79f')
-//     req.user = user
-//     next()
-//   } catch (e) {
-//     console.log(e)
-//   }
-// })
 
 app.use(express.static(path.join(__dirname, '..', 'public'))) // middleware (static public)
 app.use('/images', express.static(path.join(__dirname, 'images'))) // middleware (static images)
 app.use(express.urlencoded({ extended: true })) // form processing
 app.use(
   session({
-    secret: keys.SESSION_SECRET,
+    secret: keys.SESSION_SECRET!,
     resave: false,
     saveUninitialized: false,
-    store,
+    store: store as any,
   })
 ) // session middleware
 app.use(fileMiddleware.single('avatar')) // file middleware
@@ -112,52 +97,14 @@ app.use(favicon(path.join(__dirname, '..', 'public', 'favicon.ico'))) // favicon
 /** 404 */
 app.use(errorHandler)
 
-/** Routes without handlebars
-  app.get('/', (req, res) => {
-    res.render('index', {
-        title: 'Home page',
-        isHome: 'true'
-    })
-  })
-
-  app.get('/courses', (req, res) => {
-    res.render('courses', {
-        title: 'Courses',
-        isCourses: true
-    })
-  })
-
-  app.get('/add', (req, res) => {
-      res.render('add', {
-          title: 'Add course',
-          isAdd: true
-      })
-  })
- */
 
 /** Crete port */
 const PORT = process.env.PORT || 3000
 
-/** GET
- * @param {Request} req - запрос
- * @param {Response} resp - ответ
- * @param {NextFunction} next - продолжает выполнения других middlewares, требуется при реализации некоторых задач
- * 
- * Without handlebars
- app.get('/', (req, res,) => {
-    res.status(200); // 200 по умолчанию, необязательно
-    res.sendFile(path.join(__dirname, 'views', 'index.html'));
-  })
-
-  app.get('/about', (req, res,) => {
-    res.sendFile(path.join(__dirname, 'views', 'about.html'));
-  })
-*/
-
 /** MongoDB connect */
-async function start() {
+async function start(): Promise<void> {
   try {
-    await mongoose.connect(keys.MONGODB_URI)
+    await mongoose.connect(keys.MONGODB_URI!)
     app.listen(PORT, () => {
       console.log(`Server is running on port ${PORT}`)
     })
@@ -166,11 +113,6 @@ async function start() {
   }
 }
 start()
-
-/** Listen port */
-// app.listen(PORT, () => {
-//   console.log(`Server is running on port ${PORT}`)
-// })
 
 /** Движки для генерации HTML-файлов
  * PUG: https://pugjs.org/api/getting-started.html
