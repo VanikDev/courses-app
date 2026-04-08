@@ -1,19 +1,21 @@
-import { Router } from 'express'
+import { Router, Request, Response } from 'express'
 import Course from '../models/course.js'
 import { validationResult } from 'express-validator'
 import { courseValidators } from '../utils/validators.js'
 import auth from '../middleware/auth.js'
+import { ICourseDocument } from '#/types/course.js'
+import { IUserDocument } from '#/types/user.js'
 
-const router = Router()
+const router: Router = Router()
 
-function isOwner(course, req) {
+function isOwner(course: ICourseDocument, req: Request) {
   return course.userId.toString() === req.user._id.toString()
 }
 
-router.get('/', async (req, res) => {
+router.get('/', async (req: Request, res: Response): Promise<void> => {
   try {
     // без populate userId: string, с populate userId: Object со всеми данными, если еще указать поля - выполнится select: select('email name')
-    const courses = await Course.find().populate('userId', 'email name')
+    const courses = await Course.find().populate<{ userId: IUserDocument }>('userId', 'email name')
     res.render('courses', {
       title: 'Courses',
       isCourses: true,
@@ -25,7 +27,7 @@ router.get('/', async (req, res) => {
   }
 })
 
-router.get('/:id', async (req, res) => {
+router.get('/:id', async (req: Request, res: Response): Promise<void> => {
   try {
     const course = await Course.findById(req.params.id)
     res.render('course', {
@@ -38,7 +40,7 @@ router.get('/:id', async (req, res) => {
   }
 })
 
-router.get('/:id/edit', auth, async (req, res) => {
+router.get('/:id/edit', auth, async (req: Request, res: Response): Promise<void> => {
   if (!req.query.allow) {
     return res.redirect('/')
   }
@@ -59,7 +61,7 @@ router.get('/:id/edit', auth, async (req, res) => {
   }
 })
 
-router.post('/edit', auth, courseValidators, async (req, res) => {
+router.post('/edit', auth, courseValidators, async (req: Request, res: Response): Promise<void> => {
   const errors = validationResult(req)
 
   if (!errors.isEmpty()) {
@@ -84,7 +86,7 @@ router.post('/edit', auth, courseValidators, async (req, res) => {
   }
 })
 
-router.post('/remove', auth, async (req, res) => {
+router.post('/remove', auth, async (req: Request, res: Response): Promise<void> => {
   try {
     await Course.deleteOne({
       _id: req.body.id,

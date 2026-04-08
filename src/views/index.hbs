@@ -1,0 +1,85 @@
+<div class='container'>
+  <div class='section'>
+    <!-- Hero Section -->
+    <div class='row'>
+      <div class='col s12 center'>
+        <h1 class='header blue-text text-darken-2'>Welcome to CourseHub</h1>
+        <p class='grey-text text-darken-1'>Discover amazing courses to enhance your skills</p>
+        <a href='/courses' class='btn-large waves-effect waves-light blue darken-2'>Browse Courses</a>
+      </div>
+    </div>
+
+    <!-- Features Section -->
+    <div class='row'>
+      <div class='col s12 m4'>
+        <div class='card hoverable'>
+          <div class='card-content center'>
+            <i class='material-icons small blue-text'>school</i>
+            <h5 class='card-title'>Expert Instructors</h5>
+            <p>Learn from industry professionals with real-world experience.</p>
+          </div>
+        </div>
+      </div>
+      <div class='col s12 m4'>
+        <div class='card hoverable'>
+          <div class='card-content center'>
+            <i class='material-icons small green-text'>verified_user</i>
+            <h5 class='card-title'>Certified Content</h5>
+            <p>All courses are verified by experts to ensure quality education.</p>
+          </div>
+        </div>
+      </div>
+      <div class='col s12 m4'>
+        <div class='card hoverable'>
+          <div class='card-content center'>
+            <i class='material-icons small orange-text'>trending_up</i>
+            <h5 class='card-title'>Career Growth</h5>
+            <p>Advance your career with our comprehensive learning paths.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Popular Courses -->
+    <div class='row'>
+      <div class='col s12'>
+        <h3 class='center-align'>Popular Courses</h3>
+        {{#if courses.length}}
+          <div class='row'>
+            {{#each courses}}
+              <div class='col s12 m6 l4'>
+                <div class='card small hoverable'>
+                  <div class='card-image'>
+                    <img src='{{this.img}}' alt='{{this.title}}' />
+                    <span class='card-title blue-text'>{{this.title}}</span>
+                  </div>
+                  <div class='card-content'>
+                    <p class='blue-text text-darken-2'><strong>${{this.price}}</strong></p>
+                  </div>
+                  <div class='card-action'>
+                    <a href='/courses/{{this._id}}' class='btn-small blue darken-2'>View Details</a>
+                  </div>
+                </div>
+              </div>
+            {{/each}}
+          </div>
+        {{else}}
+          <div class='center'>
+            <p>No courses available yet.</p>
+          </div>
+        {{/if}}
+      </div>
+    </div>
+
+    <!-- CTA Section -->
+    <div class='row'>
+      <div class='col s12 center'>
+        <div class='card-panel blue lighten-5'>
+          <h5>Ready to start learning?</h5>
+          <p>Browse our catalog and find the perfect course for you.</p>
+          <a href='/courses' class='btn waves-effect waves-light blue'>Explore Courses</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

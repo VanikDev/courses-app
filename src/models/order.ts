@@ -1,7 +1,8 @@
 // model Order for working with MongoDB
 import { Schema, model } from 'mongoose'
+import { IOrderDocument } from '../types/order.js'
 
-const orderSchema = new Schema({
+const orderSchema = new Schema<IOrderDocument>({
   courses: [
     {
       course: {
@@ -28,4 +29,4 @@ const orderSchema = new Schema({
   },
 })
 
-export default model('Order', orderSchema)
+export default model<IOrderDocument>('Order', orderSchema)
