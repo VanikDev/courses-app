@@ -1,4 +1,4 @@
-import keys from '../keys/index.js'
+import keys from '../../keys/index.js'
 
 const regEmail = (email) => ({
   from: keys.SENDER,

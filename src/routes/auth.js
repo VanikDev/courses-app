@@ -6,7 +6,7 @@ import crypto from 'crypto'
 import { validationResult } from 'express-validator'
 import { registerValidators, loginValidators } from '../utils/validators.js'
 import User from '../models/user.js'
-import keys from '../keys/index.js'
+import keys from '../../keys/index.js'
 import regEmail from '../emails/registration.js'
 import resetEmail from '../emails/reset.js'
 
