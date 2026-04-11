@@ -1,8 +1,8 @@
 import { Router, Request, Response } from 'express'
-import Course from '../models/course.js'
+import Course from '#/models/course.js'
 import { validationResult } from 'express-validator'
-import { courseValidators } from '../utils/validators.js'
-import auth from '../middleware/auth.js'
+import { courseValidators } from '#/utils/validators.js'
+import auth from '#/middleware/auth.js'
 import { ICourseDocument } from '#/types/course.js'
 import { IUserDocument } from '#/types/user.js'
 

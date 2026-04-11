@@ -1,6 +1,6 @@
 // model Course for working with MongoDB
 import { Schema, model } from 'mongoose'
-import { ICourseDocument } from '../types/course.js'
+import { ICourseDocument } from '#/types/course.js'
 
 const courseSchema = new Schema<ICourseDocument>({
   title: {

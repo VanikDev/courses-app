@@ -4,12 +4,12 @@ import { MailtrapTransport } from 'mailtrap'
 import bcrypt from 'bcryptjs'
 import crypto from 'crypto'
 import { validationResult } from 'express-validator'
-import { registerValidators, loginValidators } from '../utils/validators.js'
-import User from '../models/user.js'
-import keys from '../../keys/index.js'
-import regEmail from '../emails/registration.js'
-import resetEmail from '../emails/reset.js'
-import { LoginBody, NewPasswordBody, RegisterBody, ResetBody } from '../types/routes.js'
+import { registerValidators, loginValidators } from '#/utils/validators.js'
+import User from '#/models/user.js'
+import keys from '#/keys/index.js'
+import regEmail from '#/emails/registration.js'
+import resetEmail from '#/emails/reset.js'
+import { LoginBody, NewPasswordBody, RegisterBody, ResetBody } from '#/types/routes.js'
 
 const router: Router = Router()
 

@@ -27,7 +27,7 @@ import variablesMiddleware from './middleware/variables.js'
 import userMiddleware from './middleware/user.js'
 import errorHandler from './middleware/error.js'
 import fileMiddleware from './middleware/file.js'
-import keys from './keys/index.js'
+import keys from '#/keys/index.js'
 import hbsHelpers from './utils/hbs-helpers.js'
 
 const __filename = fileURLToPath(import.meta.url)

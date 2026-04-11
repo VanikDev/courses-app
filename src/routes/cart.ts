@@ -1,6 +1,6 @@
 import { Router, Request, Response } from 'express'
-import Course from '../models/course.js'
-import auth from '../middleware/auth.js'
+import Course from '#/models/course.js'
+import auth from '#/middleware/auth.js'
 import { PopulatedCartItem, CartCourse } from '#/types/routes.js'
 
 const router: Router = Router()

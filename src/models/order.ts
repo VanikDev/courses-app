@@ -1,6 +1,6 @@
 // model Order for working with MongoDB
 import { Schema, model } from 'mongoose'
-import { IOrderDocument } from '../types/order.js'
+import { IOrderDocument } from '#/types/order.js'
 
 const orderSchema = new Schema<IOrderDocument>({
   courses: [

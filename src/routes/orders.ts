@@ -1,6 +1,6 @@
 import { Router, Request, Response } from 'express'
-import Order from '../models/order.js'
-import auth from '../middleware/auth.js'
+import Order from '#/models/order.js'
+import auth from '#/middleware/auth.js'
 import { IOrderDocument } from '#/types/order.js'
 import { PopulatedCartItem } from '#/types/routes.js'
 

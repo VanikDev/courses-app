@@ -1,5 +1,5 @@
-import { body, validationResult, ValidationChain } from 'express-validator'
-import User from '../models/user.js'
+import { body, ValidationChain } from 'express-validator'
+import User from '#/models/user.js'
 
 export const registerValidators: ValidationChain[] = [
   body('email')

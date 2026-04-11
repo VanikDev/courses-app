@@ -1,6 +1,6 @@
 import { Router, Request, Response } from 'express'
-import User from '../models/user.js'
-import { ProfileBody, ProfileRequest } from '#/types/routes.js'
+import User from '#/models/user.js'
+import { ProfileRequest } from '#/types/routes.js'
 
 const router: Router = Router()
 
