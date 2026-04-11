@@ -1,6 +1,6 @@
 import { Schema, model } from 'mongoose'
-import { ICourseDocument } from '../types/course.js'
-import { IUserDocument } from '../types/user.js'
+import { ICourseDocument } from '#/types/course.js'
+import { IUserDocument } from '#/types/user.js'
 
 const userSchema = new Schema<IUserDocument>({
   name: {

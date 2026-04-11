@@ -1,4 +1,4 @@
-import keys from '../../keys/index.js'
+import keys from '#/keys/index.js'
 
 const resetEmail = (email, token) => ({
   from: keys.SENDER,
