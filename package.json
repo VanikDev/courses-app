@@ -5,7 +5,7 @@
   "main": "server.js",
   "scripts": {
     "build": "tsc",
-    "start": "node -r dotenv/config server.js",
+    "start": "node -r dotenv/config src/server.ts",
     "dev": "nodemon --exec tsx -r dotenv/config src/server.ts",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
